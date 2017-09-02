@@ -76,7 +76,6 @@ class ClientFactory(factory.DjangoModelFactory):
     email = factory.Sequence(lambda n: '%s@gmail.com' % n)
     hometown = factory.Faker('word')
     cpf = factory.LazyAttribute(gen_cpf)
-    address = factory.RelatedFactory(AddressFactory)
 
     @factory.post_generation
     def addresses(self, create, extracted, **kwargs):
@@ -115,8 +114,9 @@ class ActiveClientMainFactory(ClientFactory):
         model = models.ActiveClient
 
     id_document = factory.django.ImageField(color='green')
+    address = factory.RelatedFactory(AddressFactory, 'client')
     proof_of_address = factory.django.ImageField(color='blue')
-    client_bank_account = factory.RelatedFactory(BankAccountFactory,
+    bank_account = factory.RelatedFactory(BankAccountFactory,
                                                  'active_client')
     spouse = factory.RelatedFactory(ClientFactory, 'active_spouse')
     dependent = factory.RelatedFactory(DependentFactory, "active_client")

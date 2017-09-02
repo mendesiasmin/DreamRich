@@ -91,11 +91,15 @@ class ActiveClient(Client):
     login = models.OneToOneField(User, null=True, blank=True)
 
     id_document = models.ImageField(
-        upload_to='public/id_documents'
+        upload_to='public/id_documents',
+        null=True,
+        blank=True
     )
 
     proof_of_address = models.ImageField(
-        upload_to='public/proof_of_address'
+        upload_to='public/proof_of_address',
+        null=True,
+        blank=True
     )
 
     def save(self, *args, **kwargs):
@@ -134,7 +138,7 @@ class BankAccount(models.Model):
 
     active_client = models.OneToOneField(
         ActiveClient,
-        related_name='client_bank_account',
+        related_name='bank_account',
         on_delete=models.CASCADE
     )
 
@@ -174,9 +178,9 @@ class Address(models.Model):
         max_length=20
     )
 
-    client = models.ManyToManyField(
+    client = models.ForeignKey(
         ActiveClient,
-        related_name='client_address'
+        related_name='address'
     )
 
     city = models.CharField(
