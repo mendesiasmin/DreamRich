@@ -5,6 +5,8 @@ from client.views import AuthView
 from client.views import (
     ActiveClientViewSet,
     ClientViewSet,
+    DependentViewSet,
+    Dependent,
     AddressViewSet,
     StateViewSet,
     CountryViewSet,
@@ -20,6 +22,7 @@ urlpatterns = [
 router = routers.DefaultRouter()
 router.register(r'^active', ActiveClientViewSet)
 router.register(r'^address', AddressViewSet)
+router.register(r'^dependents', DependentViewSet)
 router.register(r'^state', StateViewSet)
 router.register(r'^country', CountryViewSet)
 router.register(r'^bank-account', BankAccountViewSet)

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from client.serializers import (
     ClientSerializer,
+    DependentSerializer,
     ActiveClientSerializer,
     AddressSerializer,
     StateSerializer,
@@ -14,6 +15,7 @@ from client.serializers import (
 )
 from client.models import (
     Client,
+    Dependent,
     ActiveClient,
     Address,
     State,
@@ -80,6 +82,11 @@ class AuthView(APIView):
 
 
 class ClientViewSet(viewsets.ModelViewSet):
+    serializer_class = ClientSerializer
+    queryset = Client.objects.all()
+
+
+class DependentViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
     queryset = Client.objects.all()
 

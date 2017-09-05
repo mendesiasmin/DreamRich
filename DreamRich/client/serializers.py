@@ -54,7 +54,7 @@ class DependentSerializer(serializers.ModelSerializer):
         fields = [
             'name',
             'surname',
-            # 'active_client',
+            'active_client',
             'birthday'
         ]
 
