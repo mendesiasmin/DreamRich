@@ -96,6 +96,17 @@ class ActiveClient(Client):
         upload_to='public/proof_of_address'
     )
 
+    __active = True
+
+    def activate
+        __active = True
+        
+    def deactivate
+        __active = False
+
+    def get_status
+        return __active
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self.set_password(self.password)

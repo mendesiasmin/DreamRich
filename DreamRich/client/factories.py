@@ -97,3 +97,4 @@ class ActiveClientMainFactory(ClientFactory):
                                                  'active_client')
     spouse = factory.RelatedFactory(ClientFactory, 'active_spouse')
     dependent = factory.RelatedFactory(DependentFactory, "active_client")
+    
