@@ -3,9 +3,11 @@ from rest_framework.views import APIView
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
 from json import dumps
+from rest_framework.permissions import AllowAny
 
 
 class AuthView(APIView):
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         """Method to change the password value"""

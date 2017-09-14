@@ -1,7 +1,7 @@
 from rolepermissions.roles import AbstractUserRole
 
 
-class ComumEmployee(AbstractUserRole):
+class CommonEmployee(AbstractUserRole):
     available_permissions = {
         'see_all_basic_client_data': True,
         'change_own_client_data': False,

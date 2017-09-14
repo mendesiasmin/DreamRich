@@ -1,4 +1,7 @@
 from rest_framework import viewsets
+from rest_framework.decorators import detail_route
+
+from rolepermissions.mixins import HasPermissionsMixin
 from employee.serializers import (
     EmployeeSerializer,
     FinancialAdviserSerializer,
@@ -8,12 +11,21 @@ from employee.models import (
     FinancialAdviser,
 )
 
-
-class EmployeeViewSet(viewsets.ModelViewSet):
-    serializer_class = EmployeeSerializer
-    queryset = Employee.objects.all()
+class EmployeeViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+	required_permission = 'see_all_basic_client_data'
+	serializer_class = EmployeeSerializer
+	queryset = Employee.objects.all()
+	@detail_route
+	def a(self, request, *args, **kwargs):
+		print(request.user)
 
 
 class FinancialAdviserViewSet(viewsets.ModelViewSet):
-    serializer_class = FinancialAdviserSerializer
-    queryset = FinancialAdviser.objects.all()
+	required_permission = 'see_all_basic_client_data'
+	serializer_class = FinancialAdviserSerializer
+	queryset = FinancialAdviser.objects.all()	
+	
+	@detail_route(methods=['get'])
+	def a(self, request, pk=None, *args, **kwargs):
+		print(request.user)
+		return None
