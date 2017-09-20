@@ -11,21 +11,25 @@ from employee.models import (
     FinancialAdviser,
 )
 
+
 class EmployeeViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
-	required_permission = 'see_all_basic_client_data'
-	serializer_class = EmployeeSerializer
-	queryset = Employee.objects.all()
-	@detail_route
-	def a(self, request, *args, **kwargs):
-		print(request.user)
+    required_permission = 'create_employee'
+
+    serializer_class = EmployeeSerializer
+    queryset = Employee.objects.all()
+
+    @detail_route
+    def a(self, request, *args, **kwargs):
+        print(request.user)
 
 
-class FinancialAdviserViewSet(viewsets.ModelViewSet):
-	required_permission = 'see_all_basic_client_data'
-	serializer_class = FinancialAdviserSerializer
-	queryset = FinancialAdviser.objects.all()	
-	
-	@detail_route(methods=['get'])
-	def a(self, request, pk=None, *args, **kwargs):
-		print(request.user)
-		return None
+class FinancialAdviserViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'create_employee'
+
+    serializer_class = FinancialAdviserSerializer
+    queryset = FinancialAdviser.objects.all()
+
+    @detail_route(methods=['get'])
+    def a(self, request, pk=None, *args, **kwargs):
+        print(request.user)
+        return None

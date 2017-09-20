@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+from rolepermissions.mixins import HasPermissionsMixin
+
 from patrimony.serializers import (
     PatrimonySerializer,
     ActiveSerializer,
@@ -25,46 +27,117 @@ from patrimony.models import (
 )
 
 
-class PatrimonyViewSet(viewsets.ModelViewSet):
+class PatrimonyClientViewSet(HasPermissionsMixin,
+                             viewsets.ReadOnlyModelViewSet):
+    required_permission = 'see_client_complete_data'
     serializer_class = PatrimonySerializer
     queryset = Patrimony.objects.all()
 
 
-class ActiveViewSet(viewsets.ModelViewSet):
+class ActiveClientViewSet(HasPermissionsMixin, viewsets.ReadOnlyModelViewSet):
+    required_permission = 'see_client_complete_data'
     serializer_class = ActiveSerializer
     queryset = Active.objects.all()
 
 
-class ArrearageViewSet(viewsets.ModelViewSet):
+class ArrearageClientViewSet(HasPermissionsMixin,
+                             viewsets.ReadOnlyModelViewSet):
+    required_permission = 'see_client_complete_data'
     serializer_class = ArrearageSerializer
     queryset = Arrearage.objects.all()
 
 
-class RealEstateViewSet(viewsets.ModelViewSet):
+class RealEstateClientViewSet(HasPermissionsMixin,
+                              viewsets.ReadOnlyModelViewSet):
+    required_permission = 'see_client_complete_data'
     serializer_class = RealEstateSerializer
     queryset = RealEstate.objects.all()
 
 
-class CompanyParticipationViewSet(viewsets.ModelViewSet):
+class CompanyParticipationClientViewSet(
+        HasPermissionsMixin, viewsets.ReadOnlyModelViewSet):
+    required_permission = 'see_client_complete_data'
     serializer_class = CompanyParticipationSerializer
     queryset = CompanyParticipation.objects.all()
 
 
-class EquipmentViewSet(viewsets.ModelViewSet):
+class EquipmentClientViewSet(HasPermissionsMixin,
+                             viewsets.ReadOnlyModelViewSet):
+    required_permission = 'see_client_complete_data'
     serializer_class = EquipmentSerializer
     queryset = Equipment.objects.all()
 
 
-class LifeInsuranceViewSet(viewsets.ModelViewSet):
+class LifeInsuranceClientViewSet(
+        HasPermissionsMixin, viewsets.ReadOnlyModelViewSet):
+    required_permission = 'see_client_complete_data'
     serializer_class = LifeInsuranceSerializer
     queryset = LifeInsurance.objects.all()
 
 
-class IncomeViewSet(viewsets.ModelViewSet):
+class IncomeClientViewSet(HasPermissionsMixin, viewsets.ReadOnlyModelViewSet):
+    required_permission = 'see_client_complete_data'
     serializer_class = IncomeSerializer
     queryset = Income.objects.all()
 
 
-class RegularCostViewSet(viewsets.ModelViewSet):
+class RegularCostClientViewSet(
+        HasPermissionsMixin, viewsets.ReadOnlyModelViewSet):
+    required_permission = 'see_client_complete_data'
+    serializer_class = RegularCostSerializer
+    queryset = RegularCost.objects.all()
+
+
+class PatrimonyFAViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'see_client_complete_data'
+    serializer_class = PatrimonySerializer
+    queryset = Patrimony.objects.all()
+
+
+class ActiveFAViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'see_client_complete_data'
+    serializer_class = ActiveSerializer
+    queryset = Active.objects.all()
+
+
+class ArrearageFAViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'see_client_complete_data'
+    serializer_class = ArrearageSerializer
+    queryset = Arrearage.objects.all()
+
+
+class RealEstateFAViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'see_client_complete_data'
+    serializer_class = RealEstateSerializer
+    queryset = RealEstate.objects.all()
+
+
+class CompanyParticipationFAViewSet(
+        HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'see_client_complete_data'
+    serializer_class = CompanyParticipationSerializer
+    queryset = CompanyParticipation.objects.all()
+
+
+class EquipmentFAViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'see_client_complete_data'
+    serializer_class = EquipmentSerializer
+    queryset = Equipment.objects.all()
+
+
+class LifeInsuranceFAViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'see_client_complete_data'
+    serializer_class = LifeInsuranceSerializer
+    queryset = LifeInsurance.objects.all()
+
+
+class IncomeFAViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'see_client_complete_data'
+    serializer_class = IncomeSerializer
+    queryset = Income.objects.all()
+
+
+class RegularCostFAViewSet(HasPermissionsMixin, viewsets.ModelViewSet):
+    required_permission = 'see_client_complete_data'
     serializer_class = RegularCostSerializer
     queryset = RegularCost.objects.all()
