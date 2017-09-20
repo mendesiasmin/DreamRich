@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rolepermissions.mixins import HasPermissionsMixin
 from dr_auth.models import BaseUser
+from dr_auth.permissions import SomePermission
 
 from client.serializers import (
     ClientSerializer,
@@ -28,14 +29,16 @@ class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
 
 class ActiveClientViewSet(viewsets.ModelViewSet):
-    # required_permission = 'see_client_basic_data'
+    permission_classes = (SomePermission, )
+    required_permission = 'create_employee'
     serializer_class = ActiveClientSerializer
     queryset = ActiveClient.objects.all()
 
-    def get_queryset(self):
-        user = self.request.user
-        base_user = BaseUser.objects.filter(username = user.username).first()
-        print(base_user.permissions)
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     print(user)
+    #     base_user = BaseUser.objects.filter(username = user.username).first()
+    #     print(base_user.permissions)
 
 class AddressViewSet(viewsets.ModelViewSet):
     # required_permission = 'see_client_basic_data'
