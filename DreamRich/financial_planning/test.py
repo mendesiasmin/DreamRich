@@ -133,3 +133,11 @@ class FinancialPlanningTest(TestCase):
         data[200] = (0.15590697674418608)
         self.assertAlmostEqual(self.financial_planning.
                                real_gain_related_cdi(), data)
+
+    def test_annual_leftovers_for_goal_without_change(self):
+        array = [609470.63389720698, 609470.63389720698,  609470.63389720698,
+                 609470.63389720698, 609470.63389720698,  609470.63389720698,
+                 609470.63389720698, 609470.63389720698,  609470.63389720698,
+                 609470.63389720698]
+        self.assertEqual(self.financial_planning.annual_leftovers_for_goal(),
+                         array)
