@@ -39,7 +39,7 @@ DEFAULT_FROM_EMAIL = 'marcelohpf@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.19.0.4', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -104,7 +104,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dreamrich.wsgi.application'
 
-CORS_WHITELIST = ('http://localhost:3000', 'http://127.0.0.1:3000')
+CORS_WHITELIST = ( )
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
@@ -132,8 +132,11 @@ JWT_AUTH = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
