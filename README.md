@@ -2,6 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/DreamRich/DreamRich.svg?style=shield)](https://circleci.com/gh/DreamRich/DreamRich)
 
+[![Build Status](https://travis-ci.org/mendesiasmin/DreamRich.svg?branch=master)](https://travis-ci.org/mendesiasmin/DreamRich)
+
 ## Install
 
 ``` sh
