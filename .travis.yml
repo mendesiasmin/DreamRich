@@ -1,0 +1,22 @@
+language: python
+
+python:
+  - '3.6'
+
+branches:
+  only:
+  - master
+  - devel
+  - unstable
+
+install:
+  - pip install -r requirements.txt
+  - python3 manage.py setup
+  - python3 manage.py load_all
+
+script:
+  - python3 manage.py test_report
+  - python3 manage.py check_general
+  - python3 manage.py check_stylesheet
+
+
