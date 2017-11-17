@@ -11,7 +11,8 @@ branches:
 
 install:
   - pip install -r requirements.txt
-  - python3 manage.py setup_db
+  - python3 manage.py make_db
+  - python3 manage.py load_db
   - python3 manage.py load_all
 
 script:
