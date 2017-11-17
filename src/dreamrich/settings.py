@@ -133,10 +133,6 @@ JWT_AUTH = {
 
 #Use the following live settings to build on Travis CI
 if os.getenv('BUILD_ON_TRAVIS', None):
-    SECRET_KEY = "SecretKeyForUseOnTravis"
-    DEBUG = False
-    TEMPLATE_DEBUG = True
-
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -144,6 +140,13 @@ if os.getenv('BUILD_ON_TRAVIS', None):
             'USER': 'postgres',
             'HOST': 'db',
             'PORT': 5432,
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres'
         }
     }
 
