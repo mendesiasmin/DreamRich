@@ -146,8 +146,6 @@ if os.getenv('BUILD_ON_TRAVIS', None):
             'PORT': 5432,
         }
     }
-else:
-    #Non-travis DB configuration goes here
 
 
 # Password validation
