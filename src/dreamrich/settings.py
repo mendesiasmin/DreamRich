@@ -129,10 +129,14 @@ JWT_AUTH = {
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-
-#Use the following live settings to build on Travis CI
-if os.getenv('BUILD_ON_TRAVIS', None):
+if os.environ.get('BUILD_ON_TRAVIS') is not None:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres'
+        }
+    }
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -142,14 +146,6 @@ if os.getenv('BUILD_ON_TRAVIS', None):
             'PORT': 5432,
         }
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres'
-        }
-    }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
