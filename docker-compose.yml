@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres
+    container_name: dreamrich_db
+    networks:
+      - default
+
+  api:
+    build: .
+    container_name: dreamrich_api
+    entrypoint: /entrypoint.sh
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      -  .:/api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
