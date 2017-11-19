@@ -129,7 +129,7 @@ JWT_AUTH = {
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-if os.environ.get('BUILD_ON_TRAVIS') is not None:
+if os.environ.get('TRAVIS') is not None:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

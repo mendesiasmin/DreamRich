@@ -10,8 +10,7 @@ branches:
   - unstable
 
 env:
-  EMAILPWD = ''
-  BUILD_ON_TRAVIS = true
+  EMAILPWD = ""
 
 install:
   - pip install -r requirements.txt
