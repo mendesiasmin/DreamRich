@@ -9,9 +9,13 @@ branches:
   - devel
   - unstable
 
+env:
+  EMAILPWD=""
+
 install:
   - pip install -r requirements.txt
-  - python3 manage.py setup
+  - python3 manage.py make_db
+  - python3 manage.py load_db
   - python3 manage.py load_all
 
 script:
