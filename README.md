@@ -1,39 +1,64 @@
-# DreamRich
-
-[![CircleCI](https://circleci.com/gh/DreamRich/DreamRich.svg?style=shield)](https://circleci.com/gh/DreamRich/DreamRich)
-
 [![Build Status](https://travis-ci.org/mendesiasmin/DreamRich.svg?branch=master)](https://travis-ci.org/mendesiasmin/DreamRich)
 
-## Install
+# Gerência e Configuração de Software
 
-``` sh
-$ virtualenv v
-$ source v/bin/activate
-$ pip3 install -r requirements.txt
-```
+Iasmin Mendes, 14/0041940
 
-Exporte uma variável de ambiente para indicar qual pasta está o projeto backgend e fronend (**DreamRich e DreamRichJs**).
+## DreamRich
 
-## Suport scripts
+DreamRich é um software de planejamento financeiro, em desenvolvimento por alunos da UnB em parceiria com a empresa GWX Investimento. O qual usa das tecnologias Django e React para prover os serviço.
 
-Use um dos seguintes comandos para auxiliar no desenvolvimento.
+A estrutura do software está organizada em dois respositórios, um para a [API](https://github.com/DreamRich/DreamRich) e outro para a parte referente ao [FrontEnd](https://github.com/DreamRich/DreamRichJS). Para a execução deste trabalho foi criado um terceiro repositório chamdo [DreamRichStart](https://github.com/mendesiasmin/DreamRichStart) o qual tinha o objetivo de manter os arquivos de configuração separados dos arquivos tanto da API quanto do FrontEnd, logo parte do histórico de implementação deste projeto encontra-se neste repositório. Mas, para fins de poder construir qualquer uma das duas frentes independentes das outras esta ideia foi abortada, e portanto, os repositórios que prevaleceram com a implementação do código de Gerência e Configuração de Software, foram os sequintes forks do projeto original:
 
-``` sh
-$ $HOME_DREAMRICH/DreamRich/manage.py [ autofix | code_complexity | resetdb | seed -n [NUMBER] | setupdb | stylesheet | test_coverage | test_report ]
-```
-* autofix: Tenta aplicar pequenas correções na folha de estilo do código python. **Ferramenta:** autopep8;
-* code_complexity: exibe métricas do número de linhas e faz análise da complexidade ciclomática do código. **Ferramenta:** radon;
-* resetdb: executa as operações de destruir, criar e reaplicar as migrations no banco de dados. **Ferramenta:** django-extensions;
-* seed: executa a construção de NUMBER objetos das classes definidas nos arquivos DreamRich[app]/factory.py. **Ferramentas:** factory-boy;
-* setup: executa a combinação dos dois comandos anteriores [resetdb + seed]. **Ferramentas:** django-extensions, factory-boy;
-* stylesheet: analisa estaticamente o código, exibindo possíveis falhas e erros na folha de estilo de acordo com pep8. **Ferramentas:** pylint;
-* test_report: executa os testes unitários e gera um relatório no terminal. **Ferramentas:** coverage;
-* test_coverage: executa os testes unitários e gera um relatório que pode ser aberto em html. O comando para abrir é ```$ firefox DreamRich/DreamRich/htmlcov/index.html```. **Ferramentas:** coverage;
+* [Fork da API](https://github.com/mendesiasmin/DreamRich)
+* [Fork do FrontEnd](https://github.com/mendesiasmin/DreamRichJS)
 
-## Iniciando servidores
+### Integração Contínua
 
+A integração contínua foi realizada com o Travis CI somente na parte da api.
 
-Distribuições Linux com Gnome. (Pode ser utilizado o xterm ou outro terminal de sua preferência)
-``` sh
-$ gnome-terminal -e "$HOME_DREAMRICH/DreamRich/DreamRich/manage.py runserver" && gnome-terminal -e "npm start --prefix $HOME_DREAMRICH/DreamRichJs/"
-```
+[Travis](https://travis-ci.org/mendesiasmin/DreamRich)
+
+### Isolamento de ambiente
+
+Para o isolamento de ambiente utilizou-se o Docker. De forma que cada repositório (api e frontend) possui um DockerFile e um docker-compose.
+
+Para levanatr o ambiente da api, deve-se executar:
+
+1. docker-compose build
+1. docker run dreamrich_api python3 manage.py make_db
+1. docker run dreamrich_api python3 manage.py load_db
+1. docker-compose up
+
+Para o ambiente de frontend, basta:
+
+1. docker-compose build
+1. docker-compose up
+
+Comandos úteis:
+
+1. docker run dreamrich_api python3 manage.py reset_db
+1. docker run dreamrich_api python3 manage.py load_all
+
+### Automação da Build
+
+Para a build do frontend do projeto, encontra-se disponível as seguintes tarefas a serem executadas:
+
+1. gulp clean:dist
+1. gulp sass
+1. gulp sass:min
+1. gulp server
+1. gulp watch
+1. NODE_ENV= development gulp build
+
+### Empacotamento
+
+O empacotamento foi realizado somente no frontend, onde encontra-se o arquivo Packcage.json. Caso deseje testar o pacote, pode executar os seguintes passos:
+
+1. Dentro da pasta DreamRichJS execute **npm link**
+1. Saia da pasta DreamRichJS, e criei outro projeto npm qualquer, somemente para teste:
+  1. mkdir testPackcage
+  1. cd testPackcage
+  1. npm init
+1. Dentro da pasta testPackage execute o comando **npm link dreamrich**
+1. Se o pacote tiver sido gerado corretamente, será exibido o link para onde está a referência do pacote no seu computador.
